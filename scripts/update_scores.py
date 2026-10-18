@@ -32,6 +32,7 @@ RESCHEDULE_DAYS = 21
 GT = {0: "conference", 1: "non-conference", 2: "tournament", 3: "exhibition", 4: "playoff", 5: "conference-tournament"}
 
 LOG_LINES = []
+UIL_FIRST_GAME = "2026-11-13"   # UIL 2026-27 boys basketball: first day for interschool games Fri Nov 13 (scrimmages from Nov 7)
 def log(*a):
     s = " ".join(str(x) for x in a)
     LOG_LINES.append(s)
@@ -276,6 +277,9 @@ def merge(site, ledger, finals):
         if not lh and not la:
             continue
         if f["date"] < site.season_start:
+            c["ignored"] += 1; continue
+        # Texas: UIL teams (site divisions 1-6) may not play before UIL_FIRST_GAME; anything earlier is a preseason scrimmage (same rule as the schedule build).
+        if f["date"] < UIL_FIRST_GAME and any((site.slug2team.get(site.mp2slug.get(m)) or {}).get("division", 99) <= 6 for m in (f["homeMp"], f["awayMp"])):
             c["ignored"] += 1; continue
         key = (frozenset((f["homeMp"], f["awayMp"])), f["date"])
         if key in pairdate and pairdate[key] != f["contestId"]:
