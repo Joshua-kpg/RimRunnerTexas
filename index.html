@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- rimratings-redirect --><script>(function(){try{var h=location.hostname;if(h!=="rimrunnertexas.pages.dev")return;var t="https://texas.rimratings.com"+location.pathname+location.search+location.hash;var c=window.AbortController?new AbortController():null;setTimeout(function(){c&&c.abort()},4000);fetch("https://texas.rimratings.com/?rr_probe="+Date.now(),{mode:"no-cors",cache:"no-store",signal:c?c.signal:undefined}).then(function(){location.replace(t)}).catch(function(){});}catch(e){}})();</script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-title" content="RimRunnerTexas" />
+  <meta name="apple-mobile-web-app-title" content="Rim Ratings Texas" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <title>RimRunnerTexas — Texas HS Boys Basketball</title>
+  <title>Rim Ratings Texas — Texas HS Boys Basketball</title>
   <link rel="icon" href="data:,">
-    <meta property="og:title" content="RimRunnerTexas">
+    <meta property="og:title" content="Rim Ratings Texas">
   <meta property="og:description" content="Unofficial Texas HS boys basketball rankings, predictions, and weekly picks.">
-  <meta property="og:url" content="https://rimrunnertexas.pages.dev/"><!-- RimRunnerTexas URL once created -->
-  <meta name="description" content="RimRunnerTexas: unofficial Texas high school boys basketball rankings, predictions, and weekly picks. Not affiliated with the UIL, TAPPS, the SPC or MaxPreps." />
+  <meta property="og:url" content="https://texas.rimratings.com/">
+  <meta name="description" content="Rim Ratings Texas: unofficial Texas high school boys basketball rankings, predictions, and weekly picks. Not affiliated with the UIL, TAPPS, the SPC or MaxPreps." />
   <style>
     :root {
       --navy: #07111f;
@@ -434,7 +436,7 @@
       <div class="brand">
         <div class="logo">
           <div>
-            <h1>RimRunnerTexas</h1>
+            <h1>Rim Ratings Texas</h1>
             <p>Texas HS boys basketball</p>
           </div>
         </div>
@@ -457,7 +459,7 @@
 
   <div id="addHomeModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:80;padding:24px 16px;overflow:auto">
     <div style="max-width:420px;margin:40px auto;background:#12233a;border:1px solid rgba(255,203,5,.3);border-radius:16px;padding:20px;color:#f4f1e8">
-      <div style="font-weight:800;font-size:1.2rem;margin-bottom:8px">Add RimRunnerTexas to your Home Screen</div>
+      <div style="font-weight:800;font-size:1.2rem;margin-bottom:8px">Add Rim Ratings Texas to your Home Screen</div>
       <p style="color:#c9d0da;line-height:1.45">iPhone won’t let a site install itself. Do this:</p>
       <ol style="line-height:1.6;padding-left:20px">
         <li>Tap the <b>Share</b> button at the bottom of Safari (the square with the arrow).</li>
@@ -471,7 +473,7 @@
   <main class="wrap" id="app">
     <section class="hero">
       <h2>Open in Safari</h2>
-      <p>This file does not run inside Snapchat or a preview. Tap Share → Open in Safari, or open the RimRunnerTexas site link.</p>
+      <p>This file does not run inside Snapchat or a preview. Tap Share → Open in Safari, or open the Rim Ratings Texas site link.</p>
     </section>
   </main>
   <footer style="opacity:.55;font-size:.75rem;padding:8px 0 24px">Unofficial. Not affiliated with the UIL, TAPPS, the SPC or MaxPreps. Schedule and results data from MaxPreps.</footer>
@@ -17070,7 +17072,7 @@ const DATA = {
 const LAST_YEAR = {}; // intentionally empty (user decision): 2025-26 game lists are not embedded; raw data stays on the box
 
 
-/* FIREBASE — RimRunnerTexas's own project "rimrunnertexas" (not Michigan's "mitten-ratings").
+/* FIREBASE — Rim Ratings Texas's own project "rimrunnertexas" (not Michigan's "mitten-ratings").
    Web config is public by design; access is controlled by Firebase Auth + Firestore rules
    (rules source: repo firebase/firestore.rules). */
 const FIREBASE_CONFIG = {
@@ -20502,7 +20504,7 @@ function followBar() {
 }
 
 function siteOrigin() {
-  return (location.origin && location.origin !== "null") ? location.origin + location.pathname : "https://rimrunnertexas.pages.dev/";
+  return (location.origin && location.origin !== "null") ? location.origin + location.pathname : "https://texas.rimratings.com/";
 }
 function shareMatchLink() {
   return siteOrigin() + "?page=matchup&a=" + encodeURIComponent(matchA) + "&b=" + encodeURIComponent(matchB) + "&site=" + encodeURIComponent(matchSite);
@@ -20549,10 +20551,10 @@ function flashShare(msg) {
   el._t = setTimeout(() => { el.style.display = "none"; }, 2200);
 }
 async function shareText(title, text, url) {
-  const full = (text || title || "RimRunnerTexas") + (url ? "\n" + url : "");
+  const full = (text || title || "Rim Ratings Texas") + (url ? "\n" + url : "");
   try {
     if (navigator.share) {
-      await navigator.share({ title: title || "RimRunnerTexas", text: full });
+      await navigator.share({ title: title || "Rim Ratings Texas", text: full });
       flashShare("Shared");
       return;
     }
@@ -20581,24 +20583,24 @@ async function shareText(title, text, url) {
 function shareGameById(id) {
   const g = DATA.games.find(x => x.id === id);
   if (!g) {
-    shareText("RimRunnerTexas", "Texas HS boys basketball", siteOrigin());
+    shareText("Rim Ratings Texas", "Texas HS boys basketball", siteOrigin());
     return;
   }
   const p = gamePred(g);
   const home = teamById(g.homeId) || { name: "Home" };
   const away = teamById(g.awayId) || { name: "Away" };
-  shareText("RimRunnerTexas", p.spreadLabel + " · " + away.name + " at " + home.name + " · Predicted score " + p.predAway + "-" + p.predHome, shareGameLink(g.id));
+  shareText("Rim Ratings Texas", p.spreadLabel + " · " + away.name + " at " + home.name + " · Predicted score " + p.predAway + "-" + p.predHome, shareGameLink(g.id));
 }
 function shareCurrentMatchup() {
   const a = teamById(matchA), b = teamById(matchB);
-  if (!a || !b) return shareText("RimRunnerTexas", "Matchup", shareMatchLink());
+  if (!a || !b) return shareText("Rim Ratings Texas", "Matchup", shareMatchLink());
   let home = a, away = b;
   if (matchSite === "b") { home = b; away = a; }
   const saved = SYSTEM.homeCourtPoints;
   if (matchSite === "n") SYSTEM.homeCourtPoints = 0;
   const p = gamePred({ homeId: home.id, awayId: away.id, date: "2026-12-01", status: "scheduled", neutral: matchSite === "n" });
   SYSTEM.homeCourtPoints = saved;
-  shareText("RimRunnerTexas", p.spreadLabel + " · " + away.name + " at " + home.name, shareMatchLink());
+  shareText("Rim Ratings Texas", p.spreadLabel + " · " + away.name + " at " + home.name, shareMatchLink());
 }
 
 
@@ -20608,7 +20610,7 @@ function followedPage() {
 function homePage() {
   const top = gameOfTheWeek() || topWeekGames()[0];
   if (!top) {
-    return followBar() + `<section class="hero"><h2>RimRunnerTexas</h2><p>No featured game this week.</p></section>`;
+    return followBar() + `<section class="hero"><h2>Rim Ratings Texas</h2><p>No featured game this week.</p></section>`;
   }
   const g = top.g;
   const home = teamById(g.homeId);
@@ -21370,7 +21372,7 @@ function render() {
 
 
   const sp = document.getElementById("sharePicks");
-  if (sp) sp.onclick = () => shareText("RimRunnerTexas Picks", "Make your 10 ATS picks", sharePicksLink());
+  if (sp) sp.onclick = () => shareText("Rim Ratings Texas Picks", "Make your 10 ATS picks", sharePicksLink());
   const sm = document.getElementById("shareMatchup");
   if (sm) sm.onclick = () => {
     const a = teamById(matchA), b = teamById(matchB);
@@ -21382,10 +21384,10 @@ function render() {
       SYSTEM.homeCourtPoints = 0;
       const p = gamePred({ homeId: home.id, awayId: away.id, date: "2026-12-01", status: "scheduled" });
       SYSTEM.homeCourtPoints = saved;
-      shareText("RimRunnerTexas", p.spreadLabel + " · " + away.name + " at " + home.name + " (neutral)", shareMatchLink());
+      shareText("Rim Ratings Texas", p.spreadLabel + " · " + away.name + " at " + home.name + " (neutral)", shareMatchLink());
     } else {
       const p = gamePred({ homeId: home.id, awayId: away.id, date: "2026-12-01", status: "scheduled" });
-      shareText("RimRunnerTexas", p.spreadLabel + " · " + away.name + " at " + home.name, shareMatchLink());
+      shareText("Rim Ratings Texas", p.spreadLabel + " · " + away.name + " at " + home.name, shareMatchLink());
     }
   };
   const sg = document.getElementById("shareGotw");
@@ -21395,7 +21397,7 @@ function render() {
     if (!g) return;
     const p = gamePred(g);
     const home = teamById(g.homeId), away = teamById(g.awayId);
-    shareText("RimRunnerTexas Game of the Week", p.spreadLabel + " · " + away.name + " at " + home.name + " · Predicted score " + p.predAway + "-" + p.predHome, shareGameLink(g.id));
+    shareText("Rim Ratings Texas Game of the Week", p.spreadLabel + " · " + away.name + " at " + home.name + " · Predicted score " + p.predAway + "-" + p.predHome, shareGameLink(g.id));
   };
   document.querySelectorAll("[data-share-game]").forEach(el => {
     el.onclick = ev => {
@@ -21404,7 +21406,7 @@ function render() {
       if (!g) return;
       const p = gamePred(g);
       const home = teamById(g.homeId), away = teamById(g.awayId);
-      shareText("RimRunnerTexas", p.spreadLabel + " · " + away.name + " at " + home.name, shareGameLink(g.id));
+      shareText("Rim Ratings Texas", p.spreadLabel + " · " + away.name + " at " + home.name, shareGameLink(g.id));
     };
   });
 
@@ -21425,7 +21427,7 @@ if (!window.rrShareBound) {
     e.stopPropagation();
     try {
       if (btn.id === "shareMatchup") shareCurrentMatchup();
-      else if (btn.id === "sharePicks") shareText("RimRunnerTexas Picks", "Make your 10 ATS picks", sharePicksLink());
+      else if (btn.id === "sharePicks") shareText("Rim Ratings Texas Picks", "Make your 10 ATS picks", sharePicksLink());
       else if (btn.id === "shareGotw") {
         const top = gameOfTheWeek() || topWeekGames()[0];
         const g = top && top.g ? top.g : top;
