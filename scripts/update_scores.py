@@ -356,7 +356,10 @@ def find_game(site, e, cid, claimed):
 def apply(site, ledger):
     """Bake the ledger into site.games / site.teams. Idempotent."""
     gid = {g["id"]: g for g in site.games}
-    claimed = {e.get("gameId") for e in ledger["finals"].values() if e.get("gameId")}
+    def _same(c, e):   # ledger-id-fix2
+        g = gid.get(e.get("gameId"))
+        return g is not None and (g.get("maxprepsContestId") == c or {g["homeId"], g["awayId"]} == {site.mp2slug.get(e["homeMp"]), site.mp2slug.get(e["awayMp"])})
+    claimed = {e.get("gameId") for c, e in ledger["finals"].items() if e.get("gameId") and _same(c, e)}
     m = re.match(r"(.*?)\d+$", site.games[0]["id"]) if site.games else None
     prefix = m.group(1) if m else "tx26-"
     stats = {"matched": 0, "rescheduled": 0, "added": 0, "pending": 0}
@@ -364,6 +367,8 @@ def apply(site, ledger):
         if e.get("state") in ("unlisted", "ignored"):
             continue
         g = gid.get(e.get("gameId"))
+        if g is not None and g.get("maxprepsContestId") != cid and {g["homeId"], g["awayId"]} != {site.mp2slug.get(e["homeMp"]), site.mp2slug.get(e["awayMp"])}:
+            g = None   # ledger-id-fix: stored id now belongs to a different game (ids shift after a rebuild)
         if g is None:
             g, how = find_game(site, e, cid, claimed)
             if g is not None:
@@ -372,8 +377,12 @@ def apply(site, ledger):
                     stats["rescheduled"] += 1
             elif e.get("verified"):
                 n = 1 + sum(1 for x in site.games if x["id"].startswith(prefix + "x"))
+                _want = e.get("gameId") or ""
+                if not (_want.startswith(prefix + "x") and _want not in gid):   # ledger-id-fix: keep the old id when free
+                    while f"{prefix}x{n:03d}" in gid or f"{prefix}x{n:03d}" in claimed: n += 1
+                    _want = f"{prefix}x{n:03d}"
                 hs, as_ = site.mp2slug[e["homeMp"]], site.mp2slug[e["awayMp"]]
-                g = {"id": f"{prefix}x{n:03d}", "date": e["date"], "homeId": hs, "awayId": as_, "homeScore": None,
+                g = {"id": _want, "date": e["date"], "homeId": hs, "awayId": as_, "homeScore": None,
                      "awayScore": None, "status": "scheduled", "predictedHome": 0, "predictedAway": 0, "homeWinPct": 0.5,
                      "source": "maxpreps-nightly", "neutral": bool(e.get("neutral")), "time": "",
                      "gameType": e.get("gameType") or "non-conference", "notes": "", "maxprepsContestId": cid}
